@@ -139,7 +139,7 @@ const Hero = () => {
         >
           <div className="space-y-5">
             <motion.p
-              className="text-4xl md:text-6xl lg:text-7xl font-bold max-md:text-center"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold max-md:text-center mt-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
