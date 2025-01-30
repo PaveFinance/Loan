@@ -34,7 +34,7 @@ const Footer = () => {
           name: "support@pavefinance.com",
           href: "mailto:support@pavefinance.com",
         },
-        { name: "1-800-PAVE-123", href: "tel:18007283123" },
+        { name: "+2330207337449", href: "tel:+2330207337449" },
         { name: "Contact Us", href: "#" },
       ],
     },

@@ -255,12 +255,12 @@ export default function LoanCalculator() {
                 <option value="bi_annual">2 Repayments</option>
               </select>
 
-              <button
+              {/* <button
                 onClick={calculateLoan}
                 className="w-full bg-green-700 text-white p-3 rounded hover:bg-green-600 mt-4"
               >
                 Calculate Loan
-              </button>
+              </button> */}
 
               {loanDetails && (
                 <div className="mt-4 p-4 border rounded bg-gray-100">
@@ -284,7 +284,10 @@ export default function LoanCalculator() {
           )}
 
           <button
-            onClick={() => setStep(3)}
+            onClick={() => {
+              calculateLoan();
+              setStep(3);
+            }}
             className="w-full bg-blue-700 text-white p-3 rounded hover:bg-blue-600 mt-4"
           >
             Proceed to Application
@@ -298,7 +301,7 @@ export default function LoanCalculator() {
           <h2 className="text-3xl font-bold text-center text-blue-800 underline">
             Loan Application Form
           </h2>
-
+          <div></div>
           {/* Application Form Fields */}
           <input
             id="name"
