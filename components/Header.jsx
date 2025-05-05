@@ -46,16 +46,17 @@ const Header = () => {
   };
 
   const menuItems = [
-    { title: "Home", href: "/" },
-    { title: "About", href: "#about" },
-    { title: "Loan", href: "#loan" },
-    { title: "Contact", href: "#contact" },
+    { title: "About", href: "/#about" },
+    { title: "Loan", href: "/#loan" },
+    { title: "Marketplace", href: "/marketplace" },
+    { title: "Investor", href: "/investor" },
+    { title: "Contact", href: "/#contact" },
   ];
 
   return (
     <>
       <header className="sticky top-0 border z-40 backdrop-blur-md bg-white/80">
-        <div className="flex justify-between items-center mx-auto max-w-7xl p-4">
+        <div className="flex justify-between items-center mx-auto  p-4">
           <Link
             href="/"
             className="lg:text-2xl bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-400 inline-block text-transparent bg-clip-text font-extrabold"

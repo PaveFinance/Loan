@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+
+
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  fullName      String
+  phone         String?
+  salary        Int?
+  role          UserRole @default(USER)
+  applications  LoanApplication[] @relation("Borrower")
+  investments   Investment[]     @relation("Investor")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Listing {
+  id            Int      @id @default(autoincrement())
+  title         String
+  location      String
+  price         Int
+  size          String
+  bedrooms      Int
+  bathrooms     Float
+  description   String   @db.Text
+  amenities     String[]
+  images        String[]
+  applications  LoanApplication[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  isFeatured    Boolean  @default(false)
+  isAvailable   Boolean  @default(true)
+}
+
+model LoanApplication {
+  id            String   @id @default(cuid())
+  amount        Int
+  tenorMonths   Int
+  salary        Int
+  status        LoanStatus @default(OPEN)
+  borrower      User    @relation("Borrower", fields:[borrowerId], references:[id])
+  borrowerId    String
+  listing       Listing @relation(fields:[listingId], references:[id])
+  listingId     Int
+  investments   Investment[]
+  monthlyPayment Float?
+  interestRate   Float?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Investment {
+  id            String   @id @default(cuid())
+  amount        Int
+  investor      User     @relation("Investor", fields:[investorId], references:[id])
+  investorId    String
+  application   LoanApplication @relation(fields:[applicationId], references:[id])
+  applicationId String
+  status        InvestmentStatus @default(ACTIVE)
+  returnRate    Float?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum UserRole {
+  USER
+  INVESTOR
+  ADMIN
+}
+
+enum LoanStatus {
+  OPEN
+  FUNDED
+  REJECTED
+  CLOSED
+}
+
+enum InvestmentStatus {
+  ACTIVE
+  COMPLETED
+  DEFAULTED
+}
